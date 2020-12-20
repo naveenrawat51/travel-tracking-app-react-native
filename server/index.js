@@ -1,6 +1,27 @@
+require("./models/User");
 const express = require("express");
+const mongoose = require("mongoose");
+const authRoutes = require("./routes/AuthRoutes");
+const bodyParser = require("body-parser");
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(authRoutes);
+
+const mongoUrl =
+  "mongodb+srv://naveen:naveen@cluster0.qjseg.mongodb.net/travelTrack?retryWrites=true&w=majority";
+mongoose.connect(mongoUrl, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.on("connected", () => {
+  console.log("Connected to mongo instance!!");
+});
+mongoose.connection.on("error", (err) => {
+  console.error("Error connecting to mongo", err);
+});
 
 app.get("/", (req, res) => {
   res.send("Hello world");
