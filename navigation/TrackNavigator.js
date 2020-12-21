@@ -5,12 +5,16 @@ import {} from "@react-navigation/bottom-tabs";
 import { Platform } from "react-native";
 import Colors from "../constant/Colors";
 
-import AccountScreen from "../screens/Account.screen";
-import CreateTrackScreen from "../screens/CreateTrack.screen";
+import AccountScreen, { AccountScreenOptions } from "../screens/Account.screen";
+import CreateTrackScreen, {
+  CreateTrackScreenOptions,
+} from "../screens/CreateTrack.screen";
 import SigninScreen from "../screens/Signin.screen";
 import SignupScreen from "../screens/Signup.screen";
 import TrackDetailScreen from "../screens/TrackDetail.screen";
-import TrackListScreen from "../screens/TrackList.screen";
+import TrackListScreen, {
+  TrackListScreenOptions,
+} from "../screens/TrackList.screen";
 
 const defaultNavOption = {
   headerStyle: {
@@ -42,12 +46,39 @@ export const TrackListNavigator = () => {
       <TrackListStackNavigator.Screen
         name="trackList"
         component={TrackListScreen}
+        options={TrackListScreenOptions}
       />
       <TrackListStackNavigator.Screen
         name="trackDetail"
         component={TrackDetailScreen}
       />
     </TrackListStackNavigator.Navigator>
+  );
+};
+
+const AccountStackNavigator = createStackNavigator();
+export const AccountNavigator = () => {
+  return (
+    <AccountStackNavigator.Navigator screenOptions={defaultNavOption}>
+      <AccountStackNavigator.Screen
+        name="account"
+        component={AccountScreen}
+        options={AccountScreenOptions}
+      />
+    </AccountStackNavigator.Navigator>
+  );
+};
+
+const CreateTrackStackNavigator = createStackNavigator();
+export const CreateTrackNavigator = () => {
+  return (
+    <CreateTrackStackNavigator.Navigator screenOptions={defaultNavOption}>
+      <CreateTrackStackNavigator.Screen
+        name="createTrack"
+        component={CreateTrackScreen}
+        options={CreateTrackScreenOptions}
+      />
+    </CreateTrackStackNavigator.Navigator>
   );
 };
 
@@ -61,9 +92,9 @@ export const Tabnavigator = () => {
       />
       <TabBottomNavigator.Screen
         name="createTrack"
-        component={CreateTrackScreen}
+        component={CreateTrackNavigator}
       />
-      <TabBottomNavigator.Screen name="account" component={AccountScreen} />
+      <TabBottomNavigator.Screen name="account" component={AccountNavigator} />
     </TabBottomNavigator.Navigator>
   );
 };
