@@ -1,3 +1,4 @@
+/*eslint no-promise-executor-return: "error"*/
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
