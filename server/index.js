@@ -1,13 +1,13 @@
 require("./models/User");
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/AuthRoutes");
+//const authRoutes = require("./routes/AuthRoutes");
 const bodyParser = require("body-parser");
-
+const requireAuth = require("./middlewares/requireAuth");
 const app = express();
 
 app.use(bodyParser.json());
-app.use(authRoutes);
+// app.use(authRoutes);
 
 const mongoUrl =
   "mongodb+srv://naveen:naveen@cluster0.qjseg.mongodb.net/travelTrack?retryWrites=true&w=majority";
@@ -23,8 +23,8 @@ mongoose.connection.on("error", (err) => {
   console.error("Error connecting to mongo", err);
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
+app.get("/", requireAuth, (req, res) => {
+  res.send(`You email: ${req.user.email}`);
 });
 
 app.listen(3000, () => {

@@ -1,0 +1,27 @@
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+
+const User = mongoose.model("User");
+
+module.exports = (req, res, next) => {
+  const { authorization } = req.headers;
+  console.log("authorization: ", authorization);
+
+  if (!authorization) {
+    return res.status(401).send({ error: "You must be logged in." });
+  }
+
+  const token = authorization.split(" ")[1];
+  console.log("token: ", token);
+  jwt.verify(token, "MY_SECRET_KEY", async (err, payload) => {
+    if (err) {
+      return res.status(402).send({ error: "You must be logged in." });
+    }
+    console.log("payload: ", payload);
+    const { user } = payload;
+
+    const userData = await User.findById(user);
+    req.user = userData;
+    next();
+  });
+};
