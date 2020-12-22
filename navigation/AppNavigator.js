@@ -5,13 +5,15 @@ import {
   SignupNavigator,
   Tabnavigator,
 } from "./TrackNavigator";
+import { useStateValue } from "../context/trackContext";
 
 export default function AppNavigation() {
+  const [state] = useStateValue();
+  console.log("state: ", state);
   return (
     <NavigationContainer>
-      <SignupNavigator />
-      {/* <Tabnavigator /> */}
-      {/* <SignupNavigator />*/}
+      {!state.isSignedIn && <SignupNavigator />}
+      {state.isSignedIn && <Tabnavigator />}
     </NavigationContainer>
   );
 }

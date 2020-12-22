@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import { TrackProvider } from "./context/trackContext";
+import { initialState, reducer } from "./context/reducer";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -23,5 +25,9 @@ export default function App() {
     );
   }
 
-  return <AppNavigator />;
+  return (
+    <TrackProvider initialState={initialState} reducer={reducer}>
+      <AppNavigator />
+    </TrackProvider>
+  );
 }
