@@ -10,7 +10,7 @@ import CreateTrackScreen, {
   CreateTrackScreenOptions,
 } from "../screens/CreateTrack.screen";
 import SigninScreen from "../screens/Signin.screen";
-import SignupScreen from "../screens/Signup.screen";
+import SignupScreen, { SignupScreenOptions } from "../screens/Signup.screen";
 import TrackDetailScreen from "../screens/TrackDetail.screen";
 import TrackListScreen, {
   TrackListScreenOptions,
@@ -33,7 +33,11 @@ const SignupStackNavigator = createStackNavigator();
 export const SignupNavigator = () => {
   return (
     <SignupStackNavigator.Navigator screenOptions={defaultNavOption}>
-      <SignupStackNavigator.Screen name="signup" component={SignupScreen} />
+      <SignupStackNavigator.Screen
+        name="signup"
+        component={SignupScreen}
+        options={SignupScreenOptions}
+      />
       <SignupStackNavigator.Screen name="signin" component={SigninScreen} />
     </SignupStackNavigator.Navigator>
   );
