@@ -9,7 +9,8 @@ import {
 export default function AppNavigation() {
   return (
     <NavigationContainer>
-      <Tabnavigator />
+      <SignupNavigator />
+      {/* <Tabnavigator /> */}
       {/* <SignupNavigator />*/}
     </NavigationContainer>
   );
