@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react";
 import Spacer from "../components/Spacer";
 import { StyleSheet, View, Alert } from "react-native";
 import { Text, Input, Button } from "react-native-elements";
-import { signup } from "../context/actions";
+import { signup, signin } from "../context/actions";
 import { useStateValue } from "../context/trackContext";
+import { CLEAR_ERROR } from "../context/actions";
 
 export default function SignupScreen() {
   const [state, dispatch] = useStateValue();
   const { errorMessage } = state;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSignUp, setIsSignUp] = useState(true);
+
+  const authHandler = () => {
+    if (isSignUp) {
+      signup(dispatch, { email, password });
+    } else {
+      signin(dispatch, { email, password });
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Spacer>
         <Text style={styles.heading} h3>
-          Sign Up for Tracker
+          {`${isSignUp ? "Sign Up" : "Login"}`} for Tracker
         </Text>
       </Spacer>
       <Spacer>
@@ -39,9 +49,17 @@ export default function SignupScreen() {
       </Spacer>
       {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
       <Spacer>
+        <Button title={isSignUp ? "Sign Up" : "Login"} onPress={authHandler} />
+      </Spacer>
+      <Spacer>
         <Button
-          title="Sign Up"
-          onPress={() => signup(dispatch, { email, password })}
+          title={`Switch to ${isSignUp ? "Login" : "Sign Up"}`}
+          onPress={() => {
+            setIsSignUp((prevState) => !prevState);
+            dispatch({ type: CLEAR_ERROR });
+            setPassword("");
+            setEmail("");
+          }}
         />
       </Spacer>
     </View>

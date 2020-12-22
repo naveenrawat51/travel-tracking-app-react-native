@@ -1,11 +1,23 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, SafeAreaView, View, AsyncStorage } from "react-native";
+import { Button } from "react-native-elements";
+import { LOGOUT } from "../context/actions";
+import { useStateValue } from "../context/trackContext";
+import Spacer from "../components/Spacer";
 
 export default function AccountScreen() {
+  const [state, dispatch] = useStateValue();
+
+  const logoutHandler = async () => {
+    await AsyncStorage.removeItem("token");
+    dispatch({ type: LOGOUT });
+  };
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Account screen</Text>
-    </View>
+    <SafeAreaView forceInset={{ top: "always" }}>
+      <Spacer>
+        <Button title="log out" onPress={logoutHandler} />
+      </Spacer>
+    </SafeAreaView>
   );
 }
 
