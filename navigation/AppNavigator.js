@@ -9,7 +9,7 @@ import { useStateValue } from "../context/trackContext";
 
 export default function AppNavigation() {
   const [state] = useStateValue();
-
+  console.log("state: ", state);
   return (
     <NavigationContainer>
       {!state.isSignedIn && <SignupNavigator />}

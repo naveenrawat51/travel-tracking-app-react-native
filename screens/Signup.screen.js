@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Spacer from "../components/Spacer";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import { Text, Input, Button } from "react-native-elements";
+import { signup } from "../context/actions";
+import { useStateValue } from "../context/trackContext";
 
 export default function SignupScreen() {
+  const [state, dispatch] = useStateValue();
+  const { errorMessage } = state;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <View style={styles.container}>
       <Spacer>
-        <Text h3>Sign Up for Tracker</Text>
+        <Text style={styles.heading} h3>
+          Sign Up for Tracker
+        </Text>
       </Spacer>
       <Spacer>
         <Input
@@ -31,8 +37,12 @@ export default function SignupScreen() {
           autoCorrect={false}
         />
       </Spacer>
+      {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
       <Spacer>
-        <Button title="Sign Up" />
+        <Button
+          title="Sign Up"
+          onPress={() => signup(dispatch, { email, password })}
+        />
       </Spacer>
     </View>
   );
@@ -49,5 +59,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginBottom: 200,
+  },
+  errorMessage: {
+    color: "red",
+    marginHorizontal: 10,
+    fontFamily: "open-sans",
+  },
+  heading: {
+    fontFamily: "open-sans-bold",
   },
 });
