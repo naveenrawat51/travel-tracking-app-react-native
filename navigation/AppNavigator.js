@@ -1,19 +1,18 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  TrackListNavigator,
-  SignupNavigator,
-  Tabnavigator,
-} from "./TrackNavigator";
+import { SignupNavigator, Tabnavigator } from "./TrackNavigator";
 import { useStateValue } from "../context/trackContext";
+import StartupScreen from "../screens/Startup.screen";
 
 export default function AppNavigation() {
   const [state] = useStateValue();
-  console.log("state: ", state);
+  const { token, didTryAutoLogin } = state;
+
   return (
     <NavigationContainer>
-      {!state.isSignedIn && <SignupNavigator />}
-      {state.isSignedIn && <Tabnavigator />}
+      {token && <Tabnavigator />}
+      {!token && didTryAutoLogin && <SignupNavigator />}
+      {!token && !didTryAutoLogin && <StartupScreen />}
     </NavigationContainer>
   );
 }
