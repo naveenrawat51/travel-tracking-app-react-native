@@ -10,6 +10,7 @@ export default function AppNavigation() {
 
   return (
     <NavigationContainer>
+      {/* <Tabnavigator /> */}
       {token && <Tabnavigator />}
       {!token && didTryAutoLogin && <SignupNavigator />}
       {!token && !didTryAutoLogin && <StartupScreen />}

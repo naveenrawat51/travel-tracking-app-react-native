@@ -1,3 +1,5 @@
+var cors = require("cors");
+
 require("./models/User");
 require("./models/Track");
 
@@ -8,6 +10,7 @@ const trackRoutes = require("./routes/TrackRoutes");
 const bodyParser = require("body-parser");
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
