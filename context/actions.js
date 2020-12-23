@@ -33,7 +33,7 @@ export const signin = async (dispatch, payload) => {
       type: ADD_ERROR,
       message: "Something went wrong with sign up!!",
     });
-    console.log("error: ", error.response.data);
+    console.log("error: ", error);
   }
 };
 

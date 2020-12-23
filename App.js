@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import * as Font from "expo-font";
+import { LocationProvider } from "./context/locationContext";
 import AppLoading from "expo-app-loading";
 import { TrackProvider } from "./context/trackContext";
 import { initialState, reducer } from "./context/reducer";
+import {
+  locationInitialState,
+  locationReducer,
+} from "./context/location.reducer";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -26,8 +31,13 @@ export default function App() {
   }
 
   return (
-    <TrackProvider initialState={initialState} reducer={reducer}>
-      <AppNavigator />
-    </TrackProvider>
+    <LocationProvider
+      initialState={locationInitialState}
+      reducer={locationReducer}
+    >
+      <TrackProvider initialState={initialState} reducer={reducer}>
+        <AppNavigator />
+      </TrackProvider>
+    </LocationProvider>
   );
 }
