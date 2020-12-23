@@ -5,7 +5,7 @@ import { Alert } from "react-native";
 
 export default (callback, shouldTrack) => {
   const [err, setError] = useState();
-  const [subscriber, setsubscriber] = useState(null);
+  const [subscriber, setSubscriber] = useState(null);
 
   const startWatching = async () => {
     try {
@@ -19,10 +19,8 @@ export default (callback, shouldTrack) => {
         return false;
       }
 
-      await Location.getCurrentPositionAsync({
-        timeout: 5000,
-      });
-      const sub = await Location.watchPositionAsync(
+      await Location.getCurrentPositionAsync();
+      const subscribe = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
           timeInterval: 2000,
@@ -30,7 +28,7 @@ export default (callback, shouldTrack) => {
         },
         callback
       );
-      setsubscriber(sub);
+      setSubscriber(subscribe);
     } catch (err) {
       setError(err);
     }
@@ -41,9 +39,14 @@ export default (callback, shouldTrack) => {
       startWatching();
     } else {
       subscriber.remove();
-      setsubscriber(null);
     }
-  }, [shouldTrack]);
+    subscriber ? subscriber.remove() : null;
+    return () => {
+      if (subscriber) {
+        subscriber.remove();
+      }
+    };
+  }, [shouldTrack, callback]);
 
   return [err];
 };
