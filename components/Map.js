@@ -19,13 +19,13 @@ export default function Map() {
   };
   return (
     <MapView style={styles.map} initialRegion={mapRegion} region={mapRegion}>
-      {/* <Polyline coordinates={points} /> */}
       <Circle
         center={currentLocation.coords}
         radius={30}
         strokeColor="rgba(158, 158, 255, 1.0)"
         fillColor="rgba(158, 158, 255, 0.3)"
       />
+      <Polyline coordinates={state.locations.map((loc) => loc.coords)} />
     </MapView>
   );
 }
