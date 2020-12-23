@@ -4,7 +4,7 @@ import {
   CLEAR_ERROR,
   SET_DID_TRY_AL,
   LOGOUT,
-} from "./actions";
+} from "./auth.actions";
 
 export const initialState = {
   token: null,

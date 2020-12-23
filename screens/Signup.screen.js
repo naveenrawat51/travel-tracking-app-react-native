@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Spacer from "../components/Spacer";
 import { StyleSheet, View, Alert } from "react-native";
 import { Text, Input, Button } from "react-native-elements";
-import { signup, signin } from "../context/actions";
-import { useStateValue } from "../context/trackContext";
-import { CLEAR_ERROR } from "../context/actions";
+import { signup, signin } from "../context/authContext/auth.actions";
+import { useAuthStateValue } from "../context/authContext/authContext";
+import { CLEAR_ERROR } from "../context/authContext/auth.actions";
 
 export default function SignupScreen() {
-  const [state, dispatch] = useStateValue();
+  const [state, dispatch] = useAuthStateValue();
   const { errorMessage } = state;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

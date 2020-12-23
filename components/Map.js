@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import MapView, { Polyline, Circle } from "react-native-maps";
-import { useLocationStateValue } from "../context/locationContext";
+import { useLocationStateValue } from "../context/locationContext/locationContext";
 
 export default function Map() {
   const [state, dispatch] = useLocationStateValue();

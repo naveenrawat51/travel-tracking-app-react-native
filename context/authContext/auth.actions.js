@@ -1,4 +1,4 @@
-import axios from "../api/tracker";
+import axios from "../../api/tracker";
 import { AsyncStorage } from "react-native";
 
 export const SIGNUP = "SIGNUP";

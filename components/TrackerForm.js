@@ -4,8 +4,9 @@ import {
   CHANGE_NAME,
   START_RECORDING,
   STOP_RECORDING,
-} from "../context/location.action";
-import { useLocationStateValue } from "../context/locationContext";
+} from "../context/locationContext/location.action";
+import { useLocationStateValue } from "../context/locationContext/locationContext";
+
 export default function TrackForm() {
   const [state, dispatch] = useLocationStateValue();
   console.log("state", state.locations.length);
@@ -27,6 +28,13 @@ export default function TrackForm() {
           onPress={() => dispatch({ type: START_RECORDING })}
         />
       )}
+      {!state.recording && state.locations.length > 0 ? (
+        <Button
+          style={{ marginVertical: 10 }}
+          title="Save Recording"
+          onPress={() => {}}
+        />
+      ) : null}
     </>
   );
 }

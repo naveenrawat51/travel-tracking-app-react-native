@@ -6,9 +6,8 @@ import Map from "../components/Map";
 import {
   ADD_CURRENT_LOCATION,
   ADD_LOCATION,
-  START_RECORDING,
-} from "../context/location.action";
-import { useLocationStateValue } from "../context/locationContext";
+} from "../context/locationContext/location.action";
+import { useLocationStateValue } from "../context/locationContext/locationContext";
 import useLocation from "../hooks/useLocation";
 import TrackForm from "../components/TrackerForm";
 
