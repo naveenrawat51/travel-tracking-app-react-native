@@ -13,7 +13,7 @@ import { TrackProvider } from "./context/trackContext/trackContext";
 import {
   trackInitialState,
   trackReducer,
-} from "./context/trackContext/track.action";
+} from "./context/trackContext/track.reducer";
 
 const fetchFonts = () => {
   return Font.loadAsync({

@@ -1,5 +1,5 @@
 import {
-  SIGNUP,
+  SIGNIN,
   ADD_ERROR,
   CLEAR_ERROR,
   SET_DID_TRY_AL,
@@ -14,7 +14,7 @@ export const initialState = {
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
-    case SIGNUP:
+    case SIGNIN:
       return {
         ...state,
         token: action.token,

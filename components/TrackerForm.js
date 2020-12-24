@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, Button } from "react-native-elements";
 import {
   CHANGE_NAME,
@@ -6,10 +6,12 @@ import {
   STOP_RECORDING,
 } from "../context/locationContext/location.action";
 import { useLocationStateValue } from "../context/locationContext/locationContext";
+import useSaveTrack from "../hooks/useSaveTrack";
 
 export default function TrackForm() {
+  const [saveTrack] = useSaveTrack();
   const [state, dispatch] = useLocationStateValue();
-  console.log("state", state.locations.length);
+
   return (
     <>
       <Input
@@ -32,7 +34,7 @@ export default function TrackForm() {
         <Button
           style={{ marginVertical: 10 }}
           title="Save Recording"
-          onPress={() => {}}
+          onPress={saveTrack}
         />
       ) : null}
     </>

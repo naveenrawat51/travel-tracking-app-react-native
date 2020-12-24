@@ -15,7 +15,7 @@ import TrackDetailScreen from "../screens/TrackDetail.screen";
 import TrackListScreen, {
   TrackListScreenOptions,
 } from "../screens/TrackList.screen";
-
+import { Ionicons } from "@expo/vector-icons";
 const defaultNavOption = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primary : "",
@@ -89,7 +89,28 @@ export const CreateTrackNavigator = () => {
 const TabBottomNavigator = createBottomTabNavigator();
 export const Tabnavigator = () => {
   return (
-    <TabBottomNavigator.Navigator>
+    <TabBottomNavigator.Navigator
+      tabBarOptions={{
+        activeTintColor: "blue",
+        inactiveTintColor: "gray",
+      }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "trackList") {
+            iconName = focused ? "ios-list" : "ios-list";
+          } else if (route.name === "createTrack") {
+            iconName = focused ? "ios-add" : "ios-add";
+          } else if (route.name === "account") {
+            iconName = focused ? "ios-settings" : "ios-settings";
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+    >
       <TabBottomNavigator.Screen
         name="trackList"
         component={TrackListNavigator}
