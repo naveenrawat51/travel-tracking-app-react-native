@@ -4,6 +4,7 @@ import {
   START_RECORDING,
   STOP_RECORDING,
   CHANGE_NAME,
+  RESET,
 } from "./location.action";
 
 export const locationInitialState = {
@@ -39,6 +40,12 @@ export function locationReducer(state = locationInitialState, action) {
       return {
         ...state,
         name: action.name,
+      };
+    case RESET:
+      return {
+        ...state,
+        name: "",
+        locations: [],
       };
   }
   return state;

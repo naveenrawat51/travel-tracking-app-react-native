@@ -6,11 +6,14 @@ import {
   AsyncStorage,
 } from "react-native";
 import Colors from "../constant/Colors";
-import { useStateValue } from "../context/trackContext";
-import { tryLocalSignin, SET_DID_TRY_AL } from "../context/actions";
+import { useAuthStateValue } from "../context/authContext/authContext";
+import {
+  tryLocalSignin,
+  SET_DID_TRY_AL,
+} from "../context/authContext/auth.actions";
 
 export default function StartupScreen({ navigation }) {
-  const [state, dispatch] = useStateValue();
+  const [state, dispatch] = useAuthStateValue();
 
   useEffect(() => {
     const tryLogin = async () => {

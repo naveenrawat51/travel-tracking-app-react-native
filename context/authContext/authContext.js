@@ -2,7 +2,7 @@ import React, { useReducer, useContext } from "react";
 
 const TrackContext = React.createContext();
 
-export const TrackProvider = ({ reducer, initialState, children }) => {
+export const AuthProvider = ({ reducer, initialState, children }) => {
   return (
     <TrackContext.Provider value={useReducer(reducer, initialState)}>
       {children}
@@ -10,4 +10,4 @@ export const TrackProvider = ({ reducer, initialState, children }) => {
   );
 };
 
-export const useStateValue = () => useContext(TrackContext);
+export const useAuthStateValue = () => useContext(TrackContext);

@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import * as Font from "expo-font";
-import { LocationProvider } from "./context/locationContext";
+import { LocationProvider } from "./context/locationContext/locationContext";
 import AppLoading from "expo-app-loading";
-import { TrackProvider } from "./context/trackContext";
-import { initialState, reducer } from "./context/reducer";
+import { AuthProvider } from "./context/authContext/authContext";
+import { initialState, reducer } from "./context/authContext/auth.reducer";
 import {
   locationInitialState,
   locationReducer,
-} from "./context/location.reducer";
+} from "./context/locationContext/location.reducer";
+import { TrackProvider } from "./context/trackContext/trackContext";
+import {
+  trackInitialState,
+  trackReducer,
+} from "./context/trackContext/track.reducer";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -31,13 +36,15 @@ export default function App() {
   }
 
   return (
-    <LocationProvider
-      initialState={locationInitialState}
-      reducer={locationReducer}
-    >
-      <TrackProvider initialState={initialState} reducer={reducer}>
-        <AppNavigator />
-      </TrackProvider>
-    </LocationProvider>
+    <TrackProvider initialState={trackInitialState} reducer={trackReducer}>
+      <LocationProvider
+        initialState={locationInitialState}
+        reducer={locationReducer}
+      >
+        <AuthProvider initialState={initialState} reducer={reducer}>
+          <AppNavigator />
+        </AuthProvider>
+      </LocationProvider>
+    </TrackProvider>
   );
 }
